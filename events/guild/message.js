@@ -107,7 +107,7 @@ module.exports = async (client, message) => {
       .setColor(ee.wrongcolor)
       .setFooter(ee.footertext, ee.footericon)
       .setTitle(`❌ Unkown command, try: **\`${prefix}help\`**`)
-      .setDescription(`To play Music simply type \`${prefix}play <Title / Url>\``)
+   //  .setDescription(`To play Music simply type \`${prefix}play <Title / Url>\``)
     ).then(msg=>msg.delete({timeout: 5000}).catch(e=>console.log("Couldn't Delete --> Ignore".gray)));
   }catch (e){
     return message.channel.send(
