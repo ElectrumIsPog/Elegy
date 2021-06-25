@@ -22,7 +22,7 @@ module.exports = {
         .addField("Your Question", `${sentence}`)
         .addField(`<:8ball:854938074857472040> 8ball`, `${randomized}`)
         .setColor("RANDOM")
-        .setFooter(" ")
+        .setFooter(`Requested by ${message.author.username}`)
         message.channel.send(embed)
     }
 }
