@@ -19,7 +19,7 @@ module.exports = {
                 return text;
           }
             const args1 = message.content.split(" ").slice(1);
-            const ownerId = "1"
+            const ownerId = "734331898339524630"
             const ownerId2 = "425820768144719882"
             const ownerID3 = "773388061949689878"
             if(message.author.id != ownerId && message.author.id != ownerId2 && message.author.id != ownerID3) {
