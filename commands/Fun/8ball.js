@@ -11,6 +11,7 @@ module.exports = {
     usage: "8ball <question>",
     description: "Ask the 8ball a provided question",
     run: async (client, message, args, user, text, prefix) => {
+        try {
         let replies = ["Yes","No","Maybe","Not sure","Shut up you rat!","sure, why not","when you grow a braincell, yes","THAT'S A SOLID ****NO****","Nah that sucks tbh"]
         let randomized = replies[Math.floor(Math.random() * replies.length)]
         let sentence = message.content.split(" ");
@@ -24,5 +25,9 @@ module.exports = {
         .setColor("RANDOM")
         .setFooter(`Requested by ${message.author.username}`)
         message.channel.send(embed)
+        } catch (e) {
+            let {guild} = message;
+            console.log(`Someone attemptedm to use the 8 ball command in ${guild.name} but failed to provide a question, the error has been handled`.bgYellow)
+        }
     }
 }

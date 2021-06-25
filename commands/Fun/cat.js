@@ -2,7 +2,7 @@ const config = require("../../botconfig/config.json"); //loading config file wit
 const ee = require("../../botconfig/embed.json"); //Loading all embed settings like color footertext and icon ...
 const Discord = require("discord.js"); //this is the official discord.js wrapper for the Discord Api, which we use!
 const {escapeRegex} = require("../../handlers/functions"); //Loading all needed functions
-const axios = require('axios')
+const axios = require('axios') // This is the API used for making request to the cat Website
 
 module.exports = {
     name: "cat",
