@@ -38,7 +38,7 @@ module.exports = async (client) => {
       console.log("\n")
       console.log(`     ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓`.bold.brightGreen)
       console.log(`     ┃ `.bold.brightGreen + " ".repeat(-1+stringlength-` ┃ `.length)+ "┃".bold.brightGreen)
-      console.log(`     ┃ `.bold.brightGreen + `Welcome to SERVICE HANDLER!`.bold.brightGreen + " ".repeat(-1+stringlength-` ┃ `.length-`Welcome to SERVICE HANDLER!`.length)+ "┃".bold.brightGreen)
+      console.log(`     ┃ `.bold.brightGreen + `Welcome to Elegy!`.bold.brightGreen + " ".repeat(-1+stringlength-` ┃ `.length-`Welcome to Elegy`.length)+ "┃".bold.brightGreen)
       console.log(`     ┃ `.bold.brightGreen + `  /-/ By FINE-V3rm /-/`.bold.brightGreen + " ".repeat(-1+stringlength-` ┃ `.length-`  /-/ By FINE-V3rm-/`.length)+ "┃".bold.brightGreen)
       console.log(`     ┃ `.bold.brightGreen + " ".repeat(-1+stringlength-` ┃ `.length)+ "┃".bold.brightGreen)
       console.log(`     ┃ `.bold.brightGreen + `  /-/ Discord: ELECTRUM#0729 /-/`.bold.brightGreen + " ".repeat(-1+stringlength-` ┃ `.length-`  /-/ By Discord: ELECTRUM#0729 /-/`.length)+ "   ┃".bold.brightGreen)
