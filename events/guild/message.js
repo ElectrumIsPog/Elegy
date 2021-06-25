@@ -5,7 +5,7 @@
 const config = require("../../botconfig/config.json"); //loading config file with token and prefix, and settings
 const ee = require("../../botconfig/embed.json"); //Loading all embed settings like color footertext and icon ...
 const Discord = require("discord.js"); //this is the official discord.js wrapper for the Discord Api, which we use!
-const { escapeRegex} = require("../../handlers/functions"); //Loading all needed functions
+const {escapeRegex} = require("../../handlers/functions"); //Loading all needed functions
 //here the event starts
 module.exports = async (client, message) => {
   try {
@@ -44,6 +44,7 @@ module.exports = async (client, message) => {
     let command = client.commands.get(cmd);
     //if the command does not exist, try to get it by his alias
     if (!command) command = client.commands.get(client.aliases.get(cmd));
+    // Check if they have permission to run the command
     //if the command is now valid
     if (command){
         if (!client.cooldowns.has(command.name)) { //if its not in the cooldown, set it too there
@@ -74,7 +75,7 @@ module.exports = async (client, message) => {
             .setColor(ee.wrongcolor)
             .setFooter(ee.footertext, ee.footericon)
             .setTitle("❌ Error | You are not allowed to run this command!")
-            .setDescription(`You need these Permissions: \`${command.memberpermissions.join("`, ``")}\``)
+            .setDescription(`You need these Permissions: \`${command.memberpermissions.split("`, ``")}\``)
           ).then(msg=>msg.delete({timeout: 5000}).catch(e=>console.log("Couldn't Delete --> Ignore".gray)));
         }
         //if the Bot has not enough permissions return error

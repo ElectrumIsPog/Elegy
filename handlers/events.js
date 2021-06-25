@@ -1,5 +1,6 @@
 const fs = require("fs");
 const ascii = require("ascii-table");
+const message = require("../events/guild/message");
 let table = new ascii("Events");
 table.setHeading("Events", "Load status");
 const allevents = [];
@@ -14,6 +15,15 @@ module.exports = async (client) => {
         client.on(eventName, event.bind(null, client));
       }
     }
+  client.on("guildCreate", guild => {
+      console.log(`Joined a new guild, name: ${guild.name} id: ${guild}`);
+      client.channels.cache.get('857828743250837504').send(`Joined a new guild, name: ${guild.name} id: ${guild}`)  
+
+  })
+  client.on("guildDelete", guild => {
+      console.log(`Left a guild, name: ${guild.name} id: ${guild}`);
+      client.channels.cache.get('857828743250837504').send(`Left new guild, name: ${guild.name} id: ${guild}`)  
+  })
     await ["client", "guild"].forEach(e=>load_dir(e));
     for (let i = 0; i < allevents.length; i++) {
         try {
