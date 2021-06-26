@@ -21,7 +21,7 @@ module.exports = {
         const murderembed = new Discord.MessageEmbed()
         .setTitle(`${killed.username} was murdered!`)
         .setDescription(killmessages[Math.floor(Math.random() * killmessages.length)])
-        .setFooter(`Murdered by ${message.author.username}`)
+        .setFooter(`Murdered by ${message.author.username}`, ee.footericon)
         .setColor(`RED`)
     
         message.channel.send(murderembed);

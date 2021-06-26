@@ -1,5 +1,8 @@
+const config = require("../../botconfig/config.json"); //loading config file with token and prefix, and settings
+const ee = require("../../botconfig/embed.json"); //Loading all embed settings like color footertext and icon ...
 const Discord = require("discord.js"); //this is the official discord.js wrapper for the Discord Api, which we use!
-
+const {escapeRegex} = require("../../handlers/functions"); //Loading all needed functions
+const axios = require('axios') // This is the API used for making request to the cat Website
 
 module.exports = {
     name: "nigger",
@@ -15,7 +18,7 @@ module.exports = {
         .setTitle(`The nigger you requested, master.`)
         .setColor(`BROWN`)
         .setImage(`${randomized}`)
-        .setFooter(`Requested by ${message.author.username}`)
+        .setFooter(`Requested by ${message.author.username}`, ee.footericon)
         message.channel.send(niggerEmbed)
     }
 }   

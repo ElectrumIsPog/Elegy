@@ -13,8 +13,9 @@ module.exports = {
     const embed = new Discord.MessageEmbed()
         .setTitle(`Add the bot to your server!`)
         .setColor(`GREEN`)
-        .addField(`Invite`, `https://discord.com/oauth2/authorize?client_id=857775470279000085&scope=bot&permissions=8`)
-        .setFooter(`Reqested by ${message.author.username}`)
+        .addField(`Invite`, `You can add me [here](https://discord.com/oauth2/authorize?client_id=857775470279000085&scope=bot&permissions=8)!`)
+        .setFooter(`Reqested by ${message.author.username}`, ee.footericon)
+        .setThumbnail(`https://i.pinimg.com/originals/98/c7/fa/98c7fa22d316ea049d14fccf39b6b7f6.png`)
         message.channel.send(embed);
     }
 }

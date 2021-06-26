@@ -23,7 +23,7 @@ module.exports = {
         .addField("Your Question", `${sentence}`)
         .addField(`<:8ball:854938074857472040> 8ball`, `${randomized}`)
         .setColor("RANDOM")
-        .setFooter(`Requested by ${message.author.username}`)
+        .setFooter(`Requested by ${message.author.username}`, ee.footericon)
         message.channel.send(embed)
         } catch (e) {
             let {guild} = message;

@@ -19,7 +19,7 @@ module.exports = {
         .setTitle(`Gay Machine Calculator`)
         .setDescription(`${member.username} is ` + gayness + "% Gay🌈")
         .setColor("GREEN")
-        .setFooter(`Requested by ${message.author.username}`)
+        .setFooter(`Requested by ${message.author.username}`, ee.footericon)
         message.channel.send(howgayembed);
     }
 }

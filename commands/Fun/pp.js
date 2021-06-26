@@ -17,7 +17,7 @@ module.exports = {
         let ppembed = new Discord.MessageEmbed()
         .setTitle('`PP Size Machine`')
         .addField(`${person.username}'s Dick`, `${PPs}`, false)
-        .setFooter(`Requested by ${message.author.username}`)
+        .setFooter(`Requested by ${message.author.username}`, ee.footericon)
         message.channel.send(ppembed)
     }
 }

@@ -18,7 +18,7 @@ module.exports = {
             console.log('RES:', res.data[0].url)
             const catEmbed = new Discord.MessageEmbed()
             .setTitle(`A cute little cat`)
-            .setFooter(`Requested by ${message.author.username}`)
+            .setFooter(`Requested by ${message.author.username}`, ee.footericon)
             .setColor(`RED`)
             .setImage(res.data[0].url)
             message.reply(catEmbed)
