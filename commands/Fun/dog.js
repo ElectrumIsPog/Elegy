@@ -26,6 +26,7 @@ module.exports = {
         })
         .catch((err) => {
             console.error('ERR:', err)
+            message.channel.send(`Something went wrong, please report this to devloper.`)
           })
       }
     }
