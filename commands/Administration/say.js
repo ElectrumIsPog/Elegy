@@ -8,6 +8,7 @@ module.exports = {
     cooldown: 2,
     usage: "say <TEXT>",
     description: "Resends your Text",
+    memberpermissions:"ADMINISTRATOR",
     run: async (client, message, args, user, text, prefix) => {
     try{
       if(!args[0])

@@ -8,6 +8,7 @@ module.exports = {
     cooldown: 2,
     usage: "embed <TITLE> ++ <DESCRIPTION>",
     description: "Resends a message from you as an Embed",
+    memberpermissions: "ADMINISTRATOR",
     run: async (client, message, args, user, text, prefix) => {
     try{
       if(!args[0])
