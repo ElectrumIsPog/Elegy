@@ -5,7 +5,7 @@ const {escapeRegex} = require("../../handlers/functions"); //Loading all needed 
 
 module.exports = {
     name: "credits",
-    category: "Infomation",
+    category: "Information",
     aliases: ["git"],
     cooldown: 0,
     usage: "credits",
