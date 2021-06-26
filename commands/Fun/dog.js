@@ -14,14 +14,14 @@ module.exports = {
     description: "Gives you a dog",
     run: async (client, message, args, user, text, prefix) => {
         axios 
-        .get(`https://random.dog/woof.json`)
+        .get(`https://dog.ceo/api/breeds/image/random`)
         .then((res) => {
-            console.log('RES:', res.data.url)
+            console.log('RES:', res.data.message)
             const dogEmbed = new Discord.MessageEmbed()
             .setTitle(`A cute little dog`)
             .setFooter(`Requested by ${message.author.username}`)
             .setColor(`RED`)
-            .setImage(res.data.url)
+            .setImage(res.data.message)
             message.reply(dogEmbed)
         })
         .catch((err) => {
