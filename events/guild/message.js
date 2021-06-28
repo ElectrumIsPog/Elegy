@@ -35,7 +35,7 @@ module.exports = async (client, message) => {
         return message.channel.send(new Discord.MessageEmbed()
           .setColor(ee.color)
           .setFooter(ee.footertext,ee.footericon)
-          .setTitle(`Hugh? I got pinged? Imma give you some help`)
+          .setTitle(`Seems you need some help.`)
           .setDescription(`To see all Commands type: \`${prefix}help\``)
         );
       return;

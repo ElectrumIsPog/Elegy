@@ -27,7 +27,7 @@ module.exports = {
             targetMember.ban() 
            // message.channel.send(`${targetMember} would have been banned, but DEBUG mode is on.`)
         } else {
-            
+            message.channel.send(`Something went wrong`)
         }
     }
 }
