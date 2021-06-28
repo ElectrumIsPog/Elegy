@@ -7,7 +7,7 @@ module.exports = {
     name: "eval",
     category: "Owner",
     aliases: ["ev"],
-    cooldown: 2,
+    cooldown: 0,
     usage: "eval <code>",
     description: "A bot owner only command",
     run: async (client, message, args, user, text, prefix) => {
@@ -30,8 +30,6 @@ module.exports = {
               .setDescription(`You need these permissions: BOT_OWNER`)
             ).then(msg=>msg.delete({timeout: 5000}).catch(e=>console.log("Couldn't Delete --> Ignore".gray)));
             return;}
-
-
             try {
                 const code = args1.join(" ");
                 let evaled = eval(code);

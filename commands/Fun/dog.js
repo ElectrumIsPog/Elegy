@@ -18,7 +18,7 @@ module.exports = {
         .then((res) => {
             console.log('RES:', res.data.message)
             const dogEmbed = new Discord.MessageEmbed()
-            .setTitle(`A cute little dog`)
+            .setTitle(`A cute dog`)
             .setFooter(`Requested by ${message.author.username}`, ee.footericon)
             .setColor(`RED`)
             .setImage(res.data.message)
