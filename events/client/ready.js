@@ -1,5 +1,8 @@
-//here the event starts
-const config = require("../../botconfig/config.json")
+const config = require("../../botconfig/config.json"); //loading config file with token and prefix, and settings
+const ee = require("../../botconfig/embed.json"); //Loading all embed settings like color footertext and icon ...
+const Discord = require("discord.js"); //this is the official discord.js wrapper for the Discord Api, which we use!
+const {escapeRegex} = require("../../handlers/functions"); //Loading all needed functions
+const axios = require('axios') // This is the API used for making request to the cat Website
 module.exports = client => {
   try{
     const stringlength = 69;
@@ -20,9 +23,12 @@ module.exports = client => {
   //Change status each 10 minutes
   setInterval(()=>{
     try{
-      client.user.setActivity(client.user.username, { type: "PLAYING" });
+      const guild = client.guilds.cache.size
+      let stauts = [`with !help`, `with !invite`, `with friends in ${guild} servers!`]
+      let randomized = stauts[Math.floor(Math.random() * stauts.length)]
+      client.user.setActivity(randomized, { type: "PLAYING" });
     }catch (e) {
         console.log(String(e.stack).red);
     }
-  }, 10*60*1000)
+  }, 15*1000)
 }
