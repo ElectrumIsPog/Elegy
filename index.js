@@ -3,6 +3,7 @@
 const Discord = require("discord.js"); //this is the official discord.js wrapper for the Discord Api, which we use!
 const colors = require("colors"); //this Package is used, to change the colors of our Console! (optional and doesnt effect performance)
 const fs = require("fs"); //this package is for reading files and getting their inputs
+const mongoose = require(`mongoose`) // db stuff
 //Creating the Discord.js Client for This Bot with some default settings ;) and with partials, so you can fetch OLD messages
 const client = new Discord.Client({
   messageCacheLifetime: 60,
@@ -23,5 +24,10 @@ client.cooldowns = new Discord.Collection(); //an collection for cooldown comman
 ["command", "events"].forEach(handler => {
     require(`./handlers/${handler}`)(client);
 });
+// Start up DB stuff.
+mongoose.connect(`mongodb+srv://sparkyLogs:C6plfjqve8YST16o@cluster0.fuavh.mongodb.net/Data`, {
+  useNewUrlParser:true,
+  useUnifiedTopology: true})
+//mongoose.set(`useFindAndModify`, false)} finally {mongoose.connection.close()}
 //login into the bot
 client.login(require("./botconfig/config.json").token);
