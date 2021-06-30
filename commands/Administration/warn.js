@@ -6,6 +6,8 @@ module.exports = {
     name: "warn",
     category: "Administration",
     aliases: ["warn"],
+    minargs: 2,
+    maxargs: 2,
     cooldown: 2,
     usage: "w <user> [arg]",
     description: "Warns the provided user",

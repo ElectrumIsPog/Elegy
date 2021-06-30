@@ -14,10 +14,14 @@ module.exports = client => {
     console.log(`     ┃ `.bold.brightGreen + " ".repeat(-1+stringlength-` ┃ `.length)+ "┃".bold.brightGreen)
     console.log(`     ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛`.bold.brightGreen)
   }catch{ /* */ }
-
-  try{
-    client.user.setActivity(client.user.username, { type: "PLAYING" });
-  }catch (e) {
-      console.log(String(e.stack).red);
-  }
+  setInterval(()=>{
+    try{
+      const guild = client.guilds.cache.size
+      let stauts = [`with !help`, `with !invite`, `with friends in ${guild} servers!`]
+      let randomized = stauts[Math.floor(Math.random() * stauts.length)]
+      client.user.setActivity(randomized, { type: "PLAYING" });
+    }catch (e) {
+        console.log(String(e.stack).red);
+    }
+  }, 15*1000)
 }

@@ -8,6 +8,8 @@ module.exports = {
     category: "Moderation",
     cooldown: 0,
     usage: "ban <member>",
+    minargs: 1,
+    maxargs: 1,
     memberpermissions: "BAN_MEMBERS",
     description: "bans an user from the server",
     run: async (client, message, args, user, text, prefix) => {
