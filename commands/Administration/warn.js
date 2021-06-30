@@ -7,7 +7,7 @@ module.exports = {
     category: "Administration",
     aliases: ["warn"],
     cooldown: 2,
-    usage: "warn <user> [arg]",
+    usage: "w <user> [arg]",
     description: "Warns the provided user",
     memberpermissions: "ADMINISTRATOR",
     run: async (client, message, args, user, text, prefix) => {
@@ -17,7 +17,7 @@ module.exports = {
     
         let reason = args.slice(1).join(" ")
     
-        if(!reason) return message.channel.send('NO REASON!')
+        if(!reason) return message.channel.send('Provide a reason')
     
         let data = await punishments.findOne({
             GuildID: message.guild.id,
@@ -44,8 +44,10 @@ module.exports = {
                 }, ],
             });
             newData.save();
-    
-            message.channel.send(`warned ${toWarn} for \`${reason}\``)
+            
+      //      message.channel.send(`warned ${toWarn} for \`${reason}\``)
+            message.channel.send(`Warned the provided user ${toWarn} for ${reason}`)
         }
+        
     }
 }
