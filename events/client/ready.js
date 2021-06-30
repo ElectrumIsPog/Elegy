@@ -20,15 +20,4 @@ module.exports = client => {
   }catch (e) {
       console.log(String(e.stack).red);
   }
-  //Change status each 10 minutes
-  setInterval(()=>{
-    try{
-      const guild = client.guilds.cache.size
-      let stauts = [`with !help`, `with !invite`, `with friends in ${guild} servers!`]
-      let randomized = stauts[Math.floor(Math.random() * stauts.length)]
-      client.user.setActivity(randomized, { type: "PLAYING" });
-    }catch (e) {
-        console.log(String(e.stack).red);
-    }
-  }, 15*1000)
 }

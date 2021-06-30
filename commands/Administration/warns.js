@@ -20,6 +20,6 @@ module.exports = {
            return;
        }
        console.log(warns)
-       message.channel.send(`${}`)
+       message.channel.send(`${warns}`)
     }
 }
