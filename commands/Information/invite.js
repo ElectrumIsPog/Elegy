@@ -1,35 +1,21 @@
-const {
-  MessageEmbed
-} = require("discord.js");
-const config = require("../../botconfig/config.json");
-var ee = require("../../botconfig/embed.json");
-const settings = require("../../botconfig/settings.json");
+const config = require("../../botconfig/config.json"); //loading config file with token and prefix, and settings
+const ee = require("../../botconfig/embed.json"); //Loading all embed settings like color footertext and icon ...
+const Discord = require("discord.js"); //this is the official discord.js wrapper for the Discord Api, which we use!
+const {escapeRegex} = require("../../handlers/functions"); //Loading all needed functions
 module.exports = {
-  name: "invite", //the command name for execution & for helpcmd [OPTIONAL]
-  category: "Information", //the command category for helpcmd [OPTIONAL]
-  aliases: ["add"], //the command aliases for helpcmd [OPTIONAL]
-  cooldown: 5, //the command cooldown for execution & for helpcmd [OPTIONAL]
-  usage: "invite", //the command usage for helpcmd [OPTIONAL]
-  description: "Sends you an invite link", //the command description for helpcmd [OPTIONAL]
-  memberpermissions: [], //Only allow members with specific Permissions to execute a Commmand [OPTIONAL]
-  requiredroles: [], //Only allow specific Users with a Role to execute a Command [OPTIONAL]
-  alloweduserids: [], //Only allow specific Users to execute a Command [OPTIONAL]
-  minargs: 0, // minimum args for the message, 0 == none [OPTIONAL]
-  maxargs: 0, // maximum args for the message, 0 == none [OPTIONAL]
-  minplusargs: 0, // minimum args for the message, splitted with "++" , 0 == none [OPTIONAL]
-  maxplusargs: 0, // maximum args for the message, splitted with "++" , 0 == none [OPTIONAL]
-  argsmissing_message: "", //Message if the user has not enough args / not enough plus args, which will be sent, leave emtpy / dont add, if you wanna use command.usage or the default message! [OPTIONAL]
-  argstoomany_message: "", //Message if the user has too many / not enough args / too many plus args, which will be sent, leave emtpy / dont add, if you wanna use command.usage or the default message! [OPTIONAL]
-  run: async (client, message, args, plusArgs, cmdUser, text, prefix) => {
-    try {
-      message.channel.send(`https://discord.com/api/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=bot`);
-    } catch (e) {
-      console.log(String(e.stack).bgRed)
-      return message.channel.send(new MessageEmbed()
-        .setColor(ee.wrongcolor).setFooter(ee.footertext, ee.footericon)
-        .setTitle(`<:no:833101993668771842> An error occurred`)
-        .setDescription(`\`\`\`${String(JSON.stringify(e)).substr(0, 2000)}\`\`\``)
-      );
+    name: "invite",
+    category: "Information",
+    aliases: ["i", "join", "invitebot", "botinvite"],
+    cooldown: 4,
+    usage: "invite",
+    description: "Allows you to invite are amazing bot!",
+    run: async (client, message, args, user, text, prefix) => {
+    const embed = new Discord.MessageEmbed()
+        .setTitle(`Add the bot to your server!`)
+        .setColor(`GREEN`)
+        .addField(`Invite`, `You can add me [here](https://discord.com/oauth2/authorize?client_id=857775470279000085&scope=bot&permissions=8)!`)
+        .setFooter(`Reqested by ${message.author.username}`, ee.footericon)
+        .setThumbnail(`https://i.pinimg.com/originals/98/c7/fa/98c7fa22d316ea049d14fccf39b6b7f6.png`)
+        message.channel.send(embed);
     }
-  }
 }

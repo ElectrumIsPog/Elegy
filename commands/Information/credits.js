@@ -15,7 +15,7 @@ module.exports = {
         .setTitle(`Credits list`)
         .addField(`Main devloper`, `Electrum`)
         .setColor(ee.color,)
-        .addField(`Contributors`, `Nickk & Dobro bot\nTomato - Assisting in recoding help command\n Cow - Fixing dog command\n You! ${message.author.username} - for being a cool person!`)
+        .addField(`Contributors`, `Nickk & Dobro bot - A few fun commands\nTomato - Assisting in recoding help command\n Cow - Fixing dog command\n You! ${message.author.username} - for being a cool person!`)
         message.channel.send(creditsEmbed)
     }
 }
