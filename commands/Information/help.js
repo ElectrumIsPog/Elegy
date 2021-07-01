@@ -1,25 +1,15 @@
 const { MessageEmbed } = require("discord.js");
 const config = require("../../botconfig/config.json");
 const ee = require("../../botconfig/embed.json");
-const settings = require("../../botconfig/settings.json");
 module.exports = {
-  name: "help", //the command name for execution & for helpcmd [OPTIONAL]
-  category: "Information", //the command category for helpcmd [OPTIONAL]
-  aliases: ["h", "commandinfo", "cmds", "cmd", "halp"], //the command aliases for helpcmd [OPTIONAL]
-  cooldown: 3, //the command cooldown for execution & for helpcmd [OPTIONAL]
-  usage: "help [Commandname]", //the command usage for helpcmd [OPTIONAL]
-  description: "Returns all Commmands, or one specific command", //the command description for helpcmd [OPTIONAL]
-  memberpermissions: [], //Only allow members with specific Permissions to execute a Commmand [OPTIONAL]
-  requiredroles: [], //Only allow specific Users with a Role to execute a Command [OPTIONAL]
-  alloweduserids: [], //Only allow specific Users to execute a Command [OPTIONAL]
-  minargs: 0, // minimum args for the message, 0 == none [OPTIONAL]
-  maxargs: 0, // maximum args for the message, 0 == none [OPTIONAL]
-  minplusargs: 0, // minimum args for the message, splitted with "++" , 0 == none [OPTIONAL]
-  maxplusargs: 0, // maximum args for the message, splitted with "++" , 0 == none [OPTIONAL]
-  argsmissing_message: "", //Message if the user has not enough args / not enough plus args, which will be sent, leave emtpy / dont add, if you wanna use command.usage or the default message! [OPTIONAL]
-  argstoomany_message: "", //Message if the user has too many / not enough args / too many plus args, which will be sent, leave emtpy / dont add, if you wanna use command.usage or the default message! [OPTIONAL]
-    run: async (client, message, args, plusArgs, cmdUser, text, prefix) => {
-      try{
+    name: "help",
+    category: "Information",
+    aliases: ["h", "commandinfo", "cmds", "cmd"],
+    cooldown: 4,
+    usage: "help [Command]",
+    description: "Returns all Commmands, or one specific command",
+    run: async (client, message, args, user, text, prefix) => {
+    try {
         if (args[0]) {
           const embed = new MessageEmbed();
           const cmd = client.commands.get(args[0].toLowerCase()) || client.commands.get(client.aliases.get(args[0].toLowerCase()));
@@ -31,31 +21,109 @@ module.exports = {
           if (cmd.description) embed.addField("**Description**", `\`${cmd.description}\``);
           if (cmd.aliases) embed.addField("**Aliases**", `\`${cmd.aliases.map((a) => `${a}`).join("`, `")}\``);
           if (cmd.cooldown) embed.addField("**Cooldown**", `\`${cmd.cooldown} Seconds\``);
-          else embed.addField("**Cooldown**", `\`${settings.default_cooldown_in_sec} Second\``);
+          else embed.addField("**Cooldown**", `\`1 Second\``);
           if (cmd.usage) {
-              embed.addField("**Usage**", `\`${prefix}${cmd.usage}\``);
+              embed.addField("**Usage**", `\`${config.prefix}${cmd.usage}\``);
               embed.setFooter("Syntax: <> = required, [] = optional");
           }
-          return message.channel.send({embed: embed.setColor(ee.color)});
+          if (cmd.useage) {
+              embed.addField("**Useage**", `\`${config.prefix}${cmd.useage}\``);
+              embed.setFooter("Syntax: <> = required, [] = optional");
+          }
+          return message.channel.send(embed.setColor(ee.color));
         } else {
           const embed = new MessageEmbed()
               .setColor(ee.color)
               .setThumbnail(client.user.displayAvatarURL())
               .setTitle("HELP MENU 🔰 Commands")
-              .setFooter(`To see command Descriptions and Information, type: ${prefix}help [CMD NAME]`, client.user.displayAvatarURL());
+              .setFooter(`To see command descriptions and inforamtion, type: ${config.prefix}help [CMD NAME]`, client.user.displayAvatarURL());
           const commands = (category) => {
               return client.commands.filter((cmd) => cmd.category === category).map((cmd) => `\`${cmd.name}\``);
           };
           try {
+            let completearray = []
             for (let i = 0; i < client.categories.length; i += 1) {
               const current = client.categories[i];
               const items = commands(current);
-              embed.addField(`**${current.toUpperCase()} [${items.length}]**`, `> ${items.join(", ")}`);
+              let data = {
+                title: `**${current.toUpperCase()} [${items.length}]**`,
+                value: `> ${items.join(", ")}`
+              }
+              completearray.push(data)
             }
+
+//            console.log(completearray)
+
+            swap_pages(message, completearray, "HELP MENU 🔰 Commands", ["⬅️", "⏹", "➡️"], 3)
+
           } catch (e) {
               console.log(String(e.stack).red);
           }
-          message.channel.send({embed: embed});
+        }
+        
+      async function swap_pages(message, desc, TITLE, reactionemojis = ["⬅️", "⏹", "➡️"], sliceamount = 15) {
+        if(!message || !message.client) throw "No message with a valid client added"
+        //counter variable
+        let currentPage = 0;
+        //GET ALL EMBEDS
+        let embeds = [];
+        //if input is an array
+        try {
+          let arraysliceamount = sliceamount ? sliceamount : 15; 
+          let k = arraysliceamount;
+          for (let i = 0; i < desc.length; i += arraysliceamount) {
+            const current = desc.slice(i, k);
+            k += arraysliceamount;
+            const embed = new MessageEmbed()
+              .setTitle(TITLE)
+              .setColor(ee.color)
+              .setFooter(ee.footertext, ee.footericon)
+            for(const i of current){
+              embed.addField(i.title, i.value)
+            }
+            embeds.push(embed);
+          }
+        } catch {}
+        if (embeds.length === 1) return message.channel.send(embeds[0]).catch(e => console.log("THIS IS TO PREVENT A CRASH"))
+        const queueEmbed = await message.channel.send(
+          `**Current Page - ${currentPage + 1}/${embeds.length}**`,
+          embeds[currentPage]
+        ).catch(e => console.log("THIS IS TO PREVENT A CRASH"))
+        try {
+          for (const emoji of reactionemojis)
+            await queueEmbed.react(emoji);
+        } catch {}
+        const filter = (reaction, user) =>
+          (reactionemojis.includes(reaction.emoji.name) || reactionemojis.includes(reaction.emoji.name)) && message.author.id === user.id;
+        const collector = queueEmbed.createReactionCollector(filter, {
+          time: 90000
+        });
+
+        collector.on("collect", async (reaction, user) => {
+          try {
+            if (reaction.emoji.name === reactionemojis[2] || reaction.emoji.id === reactionemojis[2]) {
+              if (currentPage < embeds.length - 1) {
+                currentPage++;
+                queueEmbed.edit(`**Current Page - ${currentPage + 1}/${embeds.length}**`,{content: `**Current Page - ${currentPage + 1}/${embeds.length}**`, embed: embeds[currentPage]});
+              } else {
+                currentPage = 0
+                queueEmbed.edit(`**Current Page - ${currentPage + 1}/${embeds.length}**`,{content: `**Current Page - ${currentPage + 1}/${embeds.length}**`, embed: embeds[currentPage]});
+              }
+            } else if (reaction.emoji.name === reactionemojis[0] || reaction.emoji.id === reactionemojis[0]) {
+              if (currentPage !== 0) {
+                --currentPage;
+                queueEmbed.edit(`**Current Page - ${currentPage + 1}/${embeds.length}**`,{content: `**Current Page - ${currentPage + 1}/${embeds.length}**`, embed: embeds[currentPage]});
+              } else {
+                currentPage = embeds.length - 1
+                queueEmbed.edit(`**Current Page - ${currentPage + 1}/${embeds.length}**`,{content: `**Current Page - ${currentPage + 1}/${embeds.length}**`, embed: embeds[currentPage]});
+              }
+            } else {
+              collector.stop();
+              reaction.message.reactions.removeAll();
+            }
+            await reaction.users.remove(message.author.id);
+          } catch {}
+        });
       }
     } catch (e) {
         console.log(String(e.stack).bgRed)

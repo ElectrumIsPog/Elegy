@@ -1,3 +1,3 @@
-sometimes, i regert making stuff
+# elegy
 
-sometimes..
+a alright discord bot no cap
