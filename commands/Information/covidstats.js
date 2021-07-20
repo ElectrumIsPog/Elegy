@@ -11,21 +11,7 @@ module.exports = {
     cooldown: 5,
     usage: "covidstats",
     run: async (client, message, args, user, text, prefix) => {
-        let options = {
-            method: 'GET',
-            url: 'https://covid-19-data.p.rapidapi.com/report/totals',
-            params: {date: '26-06-2021', 'date-format': 'DD-MM-YYYY'},
-            headers: {
-               'x-rapidapi-key': `${config.rapidapi}`,
-              'x-rapidapi-host': 'covid-19-data.p.rapidapi.com'
-            }
-          };
-          
-          axios.request(options).then(response => {
-              message.channel.send(`This command is currently disabled`)
-              console.log(response.data);
-          }).catch(error => {
-              console.error(error);
-          });
-    }
+        message.channel.send(`An error has been, something is DEEPLY wrong if you see this message. (3)`)
+        
+    }  
 }

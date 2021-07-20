@@ -47,7 +47,7 @@ module.exports = {
             });
             newData.save();
             
-      //      message.channel.send(`warned ${toWarn} for \`${reason}\``)
+            message.channel.send(`warned ${toWarn} for \`${reason}\``)
             message.channel.send(`Warned the provided user ${toWarn} for ${reason}`)
         }
         

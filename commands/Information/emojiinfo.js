@@ -12,9 +12,9 @@ module.exports = {
   usage: "emojiinfo <Emoji>", //the command usage for helpcmd [OPTIONAL]
   description: "Shows Information about an Emoji", //the command description for helpcmd [OPTIONAL]
   memberpermissions: [], //Only allow members with specific Permissions to execute a Commmand [OPTIONAL]
-  requiredroles: [], //Only allow specific Users with a Role to execute a Command [OPTIONAL]
+  requiredroles: [], //Only allow specific Users with a Role to execute a Command [OPTIONAL]1
   alloweduserids: [], //Only allow specific Users to execute a Command [OPTIONAL]
-  minargs: 1, // minimum args for the message, 0 == none [OPTIONAL]
+  minargs: 1, // minimum args for the message, 0 == none [OPTIONAL] 
   maxargs: 0, // maximum args for the message, 0 == none [OPTIONAL]
   minplusargs: 0, // minimum args for the message, splitted with "++" , 0 == none [OPTIONAL]
   maxplusargs: 0, // maximum args for the message, splitted with "++" , 0 == none [OPTIONAL]
@@ -26,7 +26,7 @@ module.exports = {
       let emoteRegex = /<:.+:(\d+)>/gm
       let animatedEmoteRegex = /<a:.+:(\d+)>/gm
 
-      if(!message.content.match(hasEmoteRegex))
+      if(!message.content.match(hasEmoteRegex)) 
         return message.reply("<:no:833101993668771842> Your message does not include a VALID Emoji, please retry by adding a guild specific emoji!")
       
       if (emoji1 = emoteRegex.exec(message)) {
